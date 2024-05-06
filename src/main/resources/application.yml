@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: TT
+  datasource:
+    url: jdbc:postgresql://localhost:5432/trainTogether
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+springdoc:
+  swagger-ui:
+    path: /api/swagger-ui.html
+
+server:
+  port: 8081
+  servlet:
+    context-path: /api/v1
