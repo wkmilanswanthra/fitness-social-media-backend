@@ -34,4 +34,12 @@ public class Comment {
 
     @Column(name = "timestamp")
     private Timestamp timestamp;
+
+    public Object getText() {
+        return content;
+    }
+
+    public void setText(Object text) {
+        this.content = (String) text;
+    }
 }

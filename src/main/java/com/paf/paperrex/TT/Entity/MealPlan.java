@@ -2,6 +2,9 @@ package com.paf.paperrex.TT.Entity;
 
 import jakarta.persistence.*;
 import java.util.List;
+
+import org.springframework.lang.Nullable;
+
 import lombok.*;
 
 @Getter
@@ -39,6 +42,7 @@ public class MealPlan {
     @ElementCollection
     @CollectionTable(name = "meal_photos", joinColumns = @JoinColumn(name = "meal_id"))
     @Column(name = "photo_url")
+    @Nullable
     private List<String> photos;
 
     @Column(name = "dietary_preferences")

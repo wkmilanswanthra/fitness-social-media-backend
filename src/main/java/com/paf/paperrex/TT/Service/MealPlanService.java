@@ -4,8 +4,10 @@ import com.paf.paperrex.TT.Entity.MealPlan;
 import com.paf.paperrex.TT.Repository.MealPlanRepository;
 
 import jakarta.persistence.PersistenceException;
+import jakarta.transaction.Transactional;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,13 +52,10 @@ public class MealPlanService {
     }
 
     public List<MealPlan> getAllMealPlans() {
-    try {
         List<MealPlan> mealPlans = mealPlanRepository.findAll();
+        System.out.print("Meal Plans: ");
+        System.out.println(mealPlans);
         return mealPlans;
-    } catch (PersistenceException | DataAccessException e) {
-        System.out.println(e);
-        return null;
-    }
 }
 
 }

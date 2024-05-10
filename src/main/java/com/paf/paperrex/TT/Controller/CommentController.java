@@ -23,6 +23,12 @@ public class CommentController {
         return new ResponseEntity<>(savedComment, HttpStatus.CREATED);
     }
 
+    @PatchMapping("/{commentId}")
+    public ResponseEntity<Comment> updateComment(@PathVariable Long commentId, @RequestBody Comment comment) {
+        Comment updatedComment = commentService.updateComment(commentId, comment);
+        return ResponseEntity.ok(updatedComment);
+    }
+
     @DeleteMapping("/{commentId}")
     public ResponseEntity<Void> deleteComment(@PathVariable Long commentId) {
         commentService.deleteComment(commentId);

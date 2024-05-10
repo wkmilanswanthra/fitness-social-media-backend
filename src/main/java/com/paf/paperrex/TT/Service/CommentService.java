@@ -63,4 +63,11 @@ public class CommentService {
         commentRepository.deleteById(commentId);
     }
 
+    public Comment updateComment(Long commentId, Comment comment) {
+        Comment existingComment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new IllegalArgumentException("Comment with ID " + commentId + " not found."));
+        existingComment.setText(comment.getText());
+        return commentRepository.save(existingComment);
+    }
+
 }
