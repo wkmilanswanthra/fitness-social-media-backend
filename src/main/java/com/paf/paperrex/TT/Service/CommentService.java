@@ -35,10 +35,10 @@ public class CommentService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User with ID " + userId + " not found."));
 
-        Comment existingComment = commentRepository.findByPostAndUser(post, user);
-        if (existingComment != null) {
-            throw new IllegalStateException("User " + userId + " has already commented on post " + postId);
-        }
+        // Comment existingComment = commentRepository.findByPostAndUser(post, user);
+        // if (existingComment != null) {
+        //     throw new IllegalStateException("User " + userId + " has already commented on post " + postId);
+        // }
 
         comment.setPost(post);
         comment.setUser(user);

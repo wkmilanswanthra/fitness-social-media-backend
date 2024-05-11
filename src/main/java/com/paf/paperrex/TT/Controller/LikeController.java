@@ -42,7 +42,7 @@ public class LikeController {
         }
     }
 
-    @PostMapping("/delete/{postId}/users/{userId}")
+    @DeleteMapping("/delete/{postId}/users/{userId}")
     public ResponseEntity<String> removeLike(@PathVariable Long postId, @PathVariable Long userId) {
         try {
             likeServiceImpl.removeLike(postId, userId);

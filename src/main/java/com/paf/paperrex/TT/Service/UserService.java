@@ -36,6 +36,8 @@ public interface UserService {
 
     User findUserById(Long userId);
 
+    User updateUser(Long userId, UserDto entity);
+
     
     
 }

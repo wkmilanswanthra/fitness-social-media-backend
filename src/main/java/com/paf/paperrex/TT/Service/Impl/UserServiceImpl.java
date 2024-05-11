@@ -103,6 +103,15 @@ public class UserServiceImpl implements UserService{
         return userRepository.findById(userId).get();
     }
 
+    @Override
+    public User updateUser(Long userId, UserDto entity) {
+        User user = userRepository.findById(userId).get();
+        user.setFirstName(entity.getFirstName());
+        user.setLastName(entity.getLastName());
+        user.setUsername(entity.getUsername());
+        return userRepository.save(user);
+    }
+
     
     
 }

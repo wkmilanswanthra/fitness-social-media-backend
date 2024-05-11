@@ -1,7 +1,11 @@
 package com.paf.paperrex.TT.Service;
 import com.paf.paperrex.TT.Entity.Comment;
+import com.paf.paperrex.TT.Entity.Like;
+import com.paf.paperrex.TT.Entity.Notification;
 import com.paf.paperrex.TT.Entity.Post;
 import com.paf.paperrex.TT.Repository.CommentRepository;
+import com.paf.paperrex.TT.Repository.LikeRepository;
+import com.paf.paperrex.TT.Repository.NotificationRepository;
 import com.paf.paperrex.TT.Repository.PostRepository;
 import com.paf.paperrex.TT.Dto.PostWithCommentsDTO;
 
@@ -29,6 +33,12 @@ public class PostService {
     @Autowired
     private CommentRepository commentRepository;
 
+    @Autowired
+    private LikeRepository likeRepository;
+
+    @Autowired
+    private NotificationRepository notificationRepository;
+
     public Post createPost(Post post) {
         return postRepository.save(post);
     }
@@ -49,7 +59,15 @@ public class PostService {
     }
 
     public void deletePost(Long postId) {
+        Post post = postRepository.findById(postId).get();
+        List<Comment> comments = commentRepository.findByPostPostID(post.getPostID());
+        List<Like> likes = likeRepository.findByPostPostID(post.getPostID());
+        List<Notification> notifications = notificationRepository.findByPostPostID(post.getPostID());
+        commentRepository.deleteAll(comments);
+        likeRepository.deleteAll(likes);
+        notificationRepository.deleteAll(notifications);
         postRepository.deleteById(postId);
+
     }
 
     public List<PostWithCommentsDTO> getAllPosts() {
