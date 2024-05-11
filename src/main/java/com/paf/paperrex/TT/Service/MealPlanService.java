@@ -52,10 +52,11 @@ public class MealPlanService {
     }
 
     public List<MealPlan> getAllMealPlans() {
+        System.out.println("Getting all meal plans");
         List<MealPlan> mealPlans = mealPlanRepository.findAll();
         System.out.print("Meal Plans: ");
         System.out.println(mealPlans);
         return mealPlans;
-}
+    }
 
 }

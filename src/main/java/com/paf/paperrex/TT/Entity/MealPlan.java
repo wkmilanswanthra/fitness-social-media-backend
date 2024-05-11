@@ -13,12 +13,13 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "meal_plans")
+@Table(name = "mealplans")
 public class MealPlan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "meal_plan_seq")
     @SequenceGenerator(name = "meal_plan_seq", sequenceName = "meal_plan_seq", allocationSize = 1)
+    @Column(name = "mealid")
     private Long mealID;
 
     @ManyToOne
@@ -31,16 +32,16 @@ public class MealPlan {
     @Column(name = "description")
     private String description;
 
-    @ElementCollection
-    @CollectionTable(name = "ingredients", joinColumns = @JoinColumn(name = "meal_id"))
+    // @ElementCollection
+    // @CollectionTable(name = "ingredients", joinColumns = @JoinColumn(name = "meal_id"))
     @Column(name = "ingredient")
     private List<String> ingredients;
 
     @Column(name = "cooking_instructions")
     private String cookingInstructions;
 
-    @ElementCollection
-    @CollectionTable(name = "meal_photos", joinColumns = @JoinColumn(name = "meal_id"))
+    // @ElementCollection
+    // @CollectionTable(name = "meal_photos", joinColumns = @JoinColumn(name = "meal_id"))
     @Column(name = "photo_url")
     @Nullable
     private List<String> photos;
