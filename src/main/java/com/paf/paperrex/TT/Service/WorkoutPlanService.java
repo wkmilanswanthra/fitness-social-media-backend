@@ -39,10 +39,15 @@ public class WorkoutPlanService  {
 
     public WorkoutPlan updateWorkoutPlan(Long id, WorkoutPlan workoutPlan) {
         Optional<WorkoutPlan> optionalWorkoutPlan = workoutPlanRepository.findById(id);
+        // System.out.println("optionalWorkoutPlan: " + optionalWorkoutPlan);
+        // System.out.println("workoutPlan: " + workoutPlan);
         if (optionalWorkoutPlan.isPresent()) {
             WorkoutPlan existingWorkoutPlan = optionalWorkoutPlan.get();
             existingWorkoutPlan.setPlanName(workoutPlan.getPlanName());
             existingWorkoutPlan.setDescription(workoutPlan.getDescription());
+            for (Exercise exercise : workoutPlan.getExercises()) {
+                exercise.setWorkoutPlan(existingWorkoutPlan);
+            }
             existingWorkoutPlan.setExercises(workoutPlan.getExercises());
             return workoutPlanRepository.save(existingWorkoutPlan);
         }

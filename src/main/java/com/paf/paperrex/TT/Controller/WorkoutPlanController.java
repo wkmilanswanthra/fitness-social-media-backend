@@ -54,5 +54,20 @@ public class WorkoutPlanController {
         }
     }
 
-    // Add more endpoints as needed for update, delete, etc.
+    @PatchMapping("/{id}")
+    public ResponseEntity<WorkoutPlan> updateWorkoutPlan(@PathVariable("id") Long id, @RequestBody WorkoutPlan workoutPlan) {
+        WorkoutPlan updatedWorkoutPlan = workoutPlanService.updateWorkoutPlan(id, workoutPlan);
+        if (updatedWorkoutPlan != null) {
+            return new ResponseEntity<>(updatedWorkoutPlan, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteWorkoutPlan(@PathVariable("id") Long id) {
+        workoutPlanService.deleteWorkoutPlan(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }

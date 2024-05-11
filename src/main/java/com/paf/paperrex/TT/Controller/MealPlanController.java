@@ -52,7 +52,7 @@ public class MealPlanController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdMealPlan);
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<MealPlan> updateMealPlan(@PathVariable Long id, @RequestBody MealPlan mealPlan) {
         MealPlan updatedMealPlan = mealPlanService.updateMealPlan(id, mealPlan);
         if (updatedMealPlan != null) {

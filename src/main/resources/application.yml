@@ -8,7 +8,7 @@ spring:
     driver-class-name: org.postgresql.Driver
   web:
     resources:
-      static-locations: file:./uploads/
+      static-locations: file:uploads/
 
   jpa:
     hibernate:
