@@ -47,5 +47,4 @@ public class Post {
     @Column(name = "comments_count")
     private int commentsCount;
 
-
 }

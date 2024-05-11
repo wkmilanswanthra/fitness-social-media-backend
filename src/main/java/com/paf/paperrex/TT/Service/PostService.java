@@ -49,13 +49,9 @@ public class PostService {
     }
 
     public Post updatePost(Long postId, Post updatedPost) {
-        Optional<Post> postOptional = postRepository.findById(postId);
-        if (postOptional.isPresent()) {
-            updatedPost.setPostID(postId);
-            return postRepository.save(updatedPost);
-        } else {
-            return null;
-        }
+        Post postOptional = postRepository.findById(postId).get();
+        postOptional.setDescription(updatedPost.getDescription());
+        return postRepository.save(postOptional);
     }
 
     public void deletePost(Long postId) {
