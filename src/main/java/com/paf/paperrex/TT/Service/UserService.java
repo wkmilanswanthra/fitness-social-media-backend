@@ -38,6 +38,8 @@ public interface UserService {
 
     User updateUser(Long userId, UserDto entity);
 
+    User saveGitUser(UserDto user);
+
     
     
 }

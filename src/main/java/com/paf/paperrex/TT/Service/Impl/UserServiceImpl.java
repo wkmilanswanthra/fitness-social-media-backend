@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService{
         newUser.setPassword(PasswordEncoderUtil.hashPassword(user.getPassword()));
         return userRepository.save(newUser);
     }
-    
+
     @Override
     public User login(LoginDto loginDTO) {
         User user = userRepository.findByUsername(loginDTO.getUsername());
@@ -110,6 +110,37 @@ public class UserServiceImpl implements UserService{
         user.setLastName(entity.getLastName());
         user.setUsername(entity.getUsername());
         return userRepository.save(user);
+    }
+
+    @Override
+    public User saveGitUser(UserDto user) {
+        
+        if (userRepository.existsByUsername(user.getUsername())) {
+            LoginDto loginDTO = new LoginDto();
+            loginDTO.setUsername(user.getUsername());
+            loginDTO.setPassword(user.getPassword());
+            User loggedInUser = login(loginDTO);
+            return loggedInUser;
+        }
+        if (userRepository.findUserByEmail(user.getEmail()) != null) {
+            LoginDto loginDTO = new LoginDto();
+            loginDTO.setUsername(user.getUsername());
+            loginDTO.setPassword(user.getPassword());
+            User loggedInUser = login(loginDTO);
+            return loggedInUser;
+        }
+        User newUser = new User();
+        newUser.setFirstName(user.getFirstName());
+        newUser.setLastName(user.getLastName());
+        newUser.setEmail(user.getEmail());
+        newUser.setUsername(user.getUsername());
+        newUser.setPassword(user.getPassword());
+        userRepository.save(newUser);
+        LoginDto loginDTO = new LoginDto();
+        loginDTO.setUsername(user.getUsername());
+        loginDTO.setPassword(user.getPassword());
+        User loggedInUser = login(loginDTO);
+        return loggedInUser;
     }
 
     

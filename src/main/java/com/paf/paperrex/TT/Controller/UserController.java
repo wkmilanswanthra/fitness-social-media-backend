@@ -54,6 +54,22 @@ public class UserController {
             );
         }
     }
+    
+    @PostMapping("/register/git")
+    public ResponseEntity<EntityModel<UserResponse>> registerGitUser(@RequestBody UserDto entity) {
+        try{
+        User user = userService.saveGitUser(entity);
+        user.setPassword(null);
+         String token = jwtUtils.generateToken(user);
+        UserResponse userResponse = new UserResponse(token, user, null);
+        EntityModel<UserResponse> response = EntityModel.of(userResponse);
+        return ResponseEntity.ok(response);
+        } catch(Exception e){
+            return ResponseEntity.badRequest().body(
+                EntityModel.of(new UserResponse(e.getMessage(), null, null))
+            );
+        }
+    }
 
     @PostMapping("/login")
     public ResponseEntity<EntityModel<UserResponse>> login(@RequestBody LoginDto entity) {
