@@ -114,7 +114,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User saveGitUser(UserDto user) {
-        
+        System.out.println(user);
         if (userRepository.existsByUsername(user.getUsername())) {
             LoginDto loginDTO = new LoginDto();
             loginDTO.setUsername(user.getUsername());
@@ -134,7 +134,7 @@ public class UserServiceImpl implements UserService{
         newUser.setLastName(user.getLastName());
         newUser.setEmail(user.getEmail());
         newUser.setUsername(user.getUsername());
-        newUser.setPassword(user.getPassword());
+        newUser.setPassword(PasswordEncoderUtil.hashPassword(user.getPassword()));
         userRepository.save(newUser);
         LoginDto loginDTO = new LoginDto();
         loginDTO.setUsername(user.getUsername());
